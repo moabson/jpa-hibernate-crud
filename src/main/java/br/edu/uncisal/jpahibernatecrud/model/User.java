@@ -39,5 +39,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("[%d %s %s]", this.id, this.name, this.email);
+	}
 
 }
