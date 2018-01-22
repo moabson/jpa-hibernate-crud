@@ -6,19 +6,24 @@ import javax.persistence.Persistence;
 
 import br.edu.uncisal.shoppingcart.model.User;
 
-public class Create {
+public class Delete {
 
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("testePU");
 		EntityManager em = emf.createEntityManager();
+		
+		Long id = 2L;
 
-		User u = new User();
-		u.setName("André Moabson");
-		u.setEmail("moabsond2@gmail.com");
+		User u = em.find(User.class, id);
 
-		em.getTransaction().begin();
-		em.persist(u);
-		em.getTransaction().commit();
+		if (u != null) {
+			em.getTransaction().begin();
+			em.remove(u);
+			em.getTransaction().commit();
+		} else {
+			System.out.println("Não foi possível localizar o usuário de id = " + id + ".");			
+		}	
+
 	}
 
 }

@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.edu.uncisal.jpahibernatecrud.model.User;
+import br.edu.uncisal.shoppingcart.model.User;
 
 public class Read {
 
@@ -27,7 +27,7 @@ public class Read {
 			// NamedQuery (static query) and DynamicQuery
 
 			List<User> users = em.createQuery("from User", User.class).getResultList();
-
+		
 			for (User u : users) {
 				System.out.println(u);
 			}

@@ -1,4 +1,6 @@
-package br.edu.uncisal.jpahibernatecrud.model;
+package br.edu.uncisal.shoppingcart.model;
+
+import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,14 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "products")
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String email;
+	private BigDecimal price;
+	private Integer quantity;
 
 	public Long getId() {
 		return id;
@@ -32,17 +35,25 @@ public class User {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public BigDecimal getPrice() {
+		return price;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("[%d %s %s]", this.id, this.name, this.email);
+		return String.format("[%d %s %d %d]", this.id, this.name, this.price, this.quantity);
 	}
 
 }

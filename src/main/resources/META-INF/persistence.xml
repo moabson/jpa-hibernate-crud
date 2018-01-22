@@ -5,8 +5,7 @@
 
 	<persistence-unit name="testePU" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-
-		<class>br.edu.uncisal.jpahibernatecrud.model.User</class>
+		<class>br.edu.uncisal.jpahibernatecrud.model.Test</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/testes"/>
@@ -17,6 +16,7 @@
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />
 		</properties>
 
 	</persistence-unit>
