@@ -18,6 +18,14 @@ public class AcessLevel {
 	
 	@Enumerated(EnumType.STRING)
 	private AcessLevelType name;
+	
+	public void setId(Long id) {
+		this.id = id;		
+	}
+	
+	public Long getId() {
+		return id;		
+	}
 
 	public AcessLevelType getName() {
 		return name;
@@ -25,6 +33,11 @@ public class AcessLevel {
 
 	public void setName(AcessLevelType name) {
 		this.name = name;
+	}
+	
+	@Override
+	public String toString() {
+		return name.toString();
 	}
 
 }

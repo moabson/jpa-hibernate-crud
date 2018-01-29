@@ -1,5 +1,7 @@
 package br.edu.uncisal.shoppingcart.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
@@ -83,6 +85,7 @@ public class User {
 	public static void main(String[] args) {
 		EntityManager em = JpaUtil.getEntityManager();
 		
+		/*
 		User u = new User();
 		u.setName("Sicrano da Silva");
 		u.setUsername("sicrano");
@@ -93,7 +96,26 @@ public class User {
 		
 		em.getTransaction().begin();
 		em.persist(u);
-		em.getTransaction().commit();		
+		em.getTransaction().commit();	
+		
+		*/
+		
+		List<User> users = em.createQuery("from User", User.class).getResultList();
+		
+		
+		for (User u : users) {
+			System.out.println(u);		
+			System.out.println("Nível acesso: " + u.getAcessLevel());
+			
+			if (u.getAcessLevel().getName() == AcessLevelType.ADMIN) {
+				System.out.println("administrador");
+			}
+			
+		}
+		
+		System.out.println(User.class.getSimpleName());
+		
+		
 	}
 	
 }
