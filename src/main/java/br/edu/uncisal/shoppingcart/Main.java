@@ -2,7 +2,9 @@ package br.edu.uncisal.shoppingcart;
 
 import java.util.List;
 
+import br.edu.uncisal.shoppingcart.dao.Dao;
 import br.edu.uncisal.shoppingcart.dao.GenericDao;
+import br.edu.uncisal.shoppingcart.dao.UserDao;
 import br.edu.uncisal.shoppingcart.model.AcessLevel;
 import br.edu.uncisal.shoppingcart.model.User;
 
@@ -11,8 +13,8 @@ public class Main {
 	public static void main(String[] args) {
 
 				
-		GenericDao<User, Long> userDao = new GenericDao<User, Long>(User.class);
-		GenericDao<AcessLevel, Long> acessLevelDao = new GenericDao<AcessLevel, Long>(AcessLevel.class);
+		UserDao userDao = new UserDao(User.class);
+		//Dao<AcessLevel, Long> acessLevelDao = new GenericDao<AcessLevel, Long>(AcessLevel.class);
 		
 		List<User> users = userDao.findAll();
 		
@@ -21,7 +23,7 @@ public class Main {
 			System.out.println(u);			
 		}
 		
-		/*
+		/*		
 		
 		User newUser = new User();
 		newUser.setName("Teste Fulaninho");
@@ -29,17 +31,12 @@ public class Main {
 		newUser.setPassword("123");
 		newUser.setUsername("teste");
 
-		newUser.setAcessLevel(acessLevelDao.findById(AcessLevel.class, 2L));
+		newUser.setAcessLevel(acessLevelDao.findById(2L));
 		
 		userDao.save(newUser);
 		
 		*/
-		
-		
-		System.out.println(Object.class.getClass().getSimpleName());
-		
-		
-		
+	
 
 	}
 

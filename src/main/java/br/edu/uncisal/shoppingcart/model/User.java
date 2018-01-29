@@ -79,7 +79,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return String.format("[%d %s %s %s %s]", this.id, this.username, this.password, this.name, this.email);
+		return String.format("[%d %s %s %s %s %s]", this.id, this.username, this.password, this.name, this.email, this.acessLevel);
 	}
 	
 	public static void main(String[] args) {
@@ -100,7 +100,7 @@ public class User {
 		
 		*/
 		
-		List<User> users = em.createQuery("from User", User.class).getResultList();
+		List<User> users = em.createQuery("from User u inner join fetch u.acessLevel", User.class).getResultList();
 		
 		
 		for (User u : users) {

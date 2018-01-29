@@ -8,8 +8,8 @@ import br.edu.uncisal.shoppingcart.util.JpaUtil;
 
 public class GenericDao<T, K> implements Dao<T, K> {
 	
-	private EntityManager em;
-	private final Class<T> classe;
+	protected EntityManager em;
+	protected final Class<T> classe;
 		
 	public GenericDao(Class<T> classe) {
 		this.em = JpaUtil.getEntityManager();
