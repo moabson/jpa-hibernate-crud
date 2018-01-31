@@ -1,17 +1,18 @@
-package br.edu.uncisal.shoppingcart.dao;
+package br.edu.uncisal.shoppingcart.dao.impl;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import br.edu.uncisal.shoppingcart.dao.Dao;
 import br.edu.uncisal.shoppingcart.util.JpaUtil;
 
-public class GenericDao<T, K> implements Dao<T, K> {
+public class JpaGenericDao<T, K> implements Dao<T, K> {
 	
 	protected EntityManager em;
 	protected final Class<T> classe;
 		
-	public GenericDao(Class<T> classe) {
+	public JpaGenericDao(Class<T> classe) {
 		this.em = JpaUtil.getEntityManager();
 		this.classe = classe;
 	}
@@ -43,7 +44,7 @@ public class GenericDao<T, K> implements Dao<T, K> {
 	}
 
 	public T findById(K id) {
-		return em.find(this.classe, id);	
+		return em.find(classe, id);	
 	}
 
 	public List<T> findAll() {

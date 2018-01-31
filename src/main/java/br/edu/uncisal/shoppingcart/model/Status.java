@@ -30,6 +30,11 @@ public class Status {
 		this.name = name;
 	}
 	
+	@Override
+	public String toString() {
+		return name.toString();
+	}
+	
 	public static void main(String[] args) {
 		EntityManager em = JpaUtil.getEntityManager();
 		

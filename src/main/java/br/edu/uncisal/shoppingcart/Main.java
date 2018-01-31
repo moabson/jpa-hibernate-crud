@@ -2,26 +2,44 @@ package br.edu.uncisal.shoppingcart;
 
 import java.util.List;
 
-import br.edu.uncisal.shoppingcart.dao.Dao;
-import br.edu.uncisal.shoppingcart.dao.GenericDao;
+import br.edu.uncisal.shoppingcart.dao.CartDao;
 import br.edu.uncisal.shoppingcart.dao.UserDao;
-import br.edu.uncisal.shoppingcart.model.AcessLevel;
+import br.edu.uncisal.shoppingcart.dao.impl.CartDaoImpl;
+import br.edu.uncisal.shoppingcart.dao.impl.UserDaoImpl;
+import br.edu.uncisal.shoppingcart.model.Cart;
+import br.edu.uncisal.shoppingcart.model.Product;
 import br.edu.uncisal.shoppingcart.model.User;
+import br.edu.uncisal.shoppingcart.service.CartService;
 
 public class Main {
 
 	public static void main(String[] args) {
 
 				
-		UserDao userDao = new UserDao(User.class);
+		UserDao userDao = new UserDaoImpl(User.class);
 		//Dao<AcessLevel, Long> acessLevelDao = new GenericDao<AcessLevel, Long>(AcessLevel.class);
 		
-		List<User> users = userDao.findAll();
+		userDao.findAll();
 		
+		List<User> users = userDao.findAllAdminUsers();
 		
 		for (User u : users) {
 			System.out.println(u);			
 		}
+		
+		
+		CartDao cartDao = new CartDaoImpl(Cart.class);
+		
+		CartService service = new CartService();
+		
+		Cart cart = cartDao.findById(1L);
+		
+		List<Product> products = service.getAllCartProducts(cart);
+		
+		for (Product product : products) {
+			System.out.println(product.getName());
+		}
+		
 		
 		/*		
 		

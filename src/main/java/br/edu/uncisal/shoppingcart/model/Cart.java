@@ -1,11 +1,13 @@
 package br.edu.uncisal.shoppingcart.model;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,20 +33,20 @@ public class Cart {
 	private User user;
 	
 	@Column(name = "total")
-	private BigDecimal total;
+	private Double total;
 	
 	@ManyToOne
 	@JoinColumn(name = "status_id")
 	private Status status;
-
 	
-	@ManyToMany
+	// FetchType.LAZY = só sera carregado quando getProducts() for chamado	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinTable(
 				name = "cart_product",
 				joinColumns = @JoinColumn(name = "cart_id"),
 				inverseJoinColumns = @JoinColumn(name = "product_id")
 			)
-	private List<Product> products;
+	private Set<Product> products;
 	
 	public Long getId() {
 		return id;
@@ -62,11 +64,11 @@ public class Cart {
 		this.user = user;
 	}
 
-	public BigDecimal getTotal() {
+	public Double getTotal() {
 		return total;
 	}
 
-	public void setTotal(BigDecimal total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 
@@ -78,7 +80,7 @@ public class Cart {
 		this.status = status;
 	}
 	
-	public List<Product> getProducts() {
+	public Set<Product> getProducts() {
 		return products;
 	}
 	
@@ -92,23 +94,25 @@ public class Cart {
 	}
 	
 	public static void main(String[] args) {
-		
 		EntityManager em = JpaUtil.getEntityManager();
-	
+		EntityManager em2 = JpaUtil.getEntityManager();
 		
-		Product product = em.find(Product.class, 2L);
-		
+		//System.out.println(em);
+		//System.out.println(em2);
+
+		Product product1 = em2.find(Product.class, 3L);
+		Product product2 = em2.find(Product.class, 2L);
 		Cart cart = em.find(Cart.class, 1L);
 		
-		cart.products.add(product);
-		
+		cart.products.add(product1);
+		cart.products.add(product2);
 		
 		em.getTransaction().begin();
-		//em.persist(cart);
+		em.persist(cart);
 		em.getTransaction().commit();
 		
 		
-		System.out.println(cart.products.size());
+		//System.out.println(cart.products.size());
 		
 		
 	}
