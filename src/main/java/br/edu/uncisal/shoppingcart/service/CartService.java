@@ -43,11 +43,27 @@ public class CartService {
 		
 	} 
 	
+	public void updateCartStatus(Cart cart, StatusType statusType) {
+		
+		if (cart != null && statusType != null) {
+			StatusDao statusDao = new StatusDaoImpl(Status.class);
+			
+			Status status = statusDao.findByName(statusType);
+			
+			cart.setStatus(status);
+			
+			this.cartDao.update(cart.getId());			
+		}
+		
+	}
+	
 	public void addProductToCart(Product product, Cart cart) {
 				
 		if (product != null && cart != null) {
 			cart.addProduct(product);
-			this.cartDao.save(cart);
+			cart.setTotal(cart.getTotal() + product.getPrice());
+			
+			this.cartDao.update(cart.getId());
 		}
 		
 	}
@@ -61,26 +77,30 @@ public class CartService {
 	}
 	
 	public static void main(String[] args) {
-		CartDao cartDao = new CartDaoImpl(Cart.class);
-				
-		Dao<Product, Long> productDao = new JpaGenericDao<Product, Long>(Product.class);
-		UserDao userDao = new UserDaoImpl(User.class);
 		
-		User user = userDao.findById(7L);
+		CartDao cartDao = new CartDaoImpl(Cart.class);
+		
+		Dao<Product, Long> productDao = new JpaGenericDao<Product, Long>(Product.class);
+
+		//UserDao userDao = new UserDaoImpl(User.class);
+		
+		//User user = userDao.findById(7L);
 		
 		CartService service = new CartService();
 		
-		service.createCartForUser(user);
+		//service.createCartForUser(user);
 
-		//Cart cart = cartDao.findById(1L);		
+		Cart cart = cartDao.findById(1L);		
 		
-		//Product product1 = productDao.findById(3L);
-		//Product product2 = productDao.findById(2L);
+		Product product1 = productDao.findById(3L);
+		Product product2 = productDao.findById(2L);
 		
-		//System.out.println(product1);
+		System.out.println(product1);
 		
-		//service.addProductToCart(product1, cart);
-		//service.addProductToCart(product2, cart);
+		service.addProductToCart(product1, cart);
+		service.addProductToCart(product2, cart);
+		
+		service.updateCartStatus(cart, StatusType.PAGAMENTO_EFETUADO);
 	}
 	
 

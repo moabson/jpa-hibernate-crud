@@ -5,7 +5,16 @@
 
 	<persistence-unit name="testePU" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		
+		<class>br.edu.uncisal.jpahibernatecrud.model.CommissionedEmployee</class>
+		<class>br.edu.uncisal.jpahibernatecrud.model.Employee</class>
+		<class>br.edu.uncisal.jpahibernatecrud.model.SalariedEmployee</class>
 		<class>br.edu.uncisal.jpahibernatecrud.model.Test</class>
+		<class>br.edu.uncisal.shoppingcart.model.AcessLevel</class>
+		<class>br.edu.uncisal.shoppingcart.model.Cart</class>
+		<class>br.edu.uncisal.shoppingcart.model.Product</class>
+		<class>br.edu.uncisal.shoppingcart.model.Status</class>
+		<class>br.edu.uncisal.shoppingcart.model.User</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/testes"/>
@@ -17,6 +26,7 @@
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
 		</properties>
 
 	</persistence-unit>

@@ -1,6 +1,5 @@
 package br.edu.uncisal.shoppingcart.model;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
